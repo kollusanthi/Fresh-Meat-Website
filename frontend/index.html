@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FreshMeat | Freshness Delivered</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-strip">Fresh cuts. Honest prices. Delivered to your door.</div>
+
+<header class="site-header">
+  <a class="brand" href="#home" onclick="goHome(); return false;">
+    <span class="brand-mark">F</span>
+    <span>Fresh<span class="brand-accent">meat</span><small>FRESHNESS, EVERY DAY</small></span>
+  </a>
+
+
+  <nav class="main-nav" id="mainNav">
+    <a href="#home">Home</a>
+    <a href="#shop">Shop</a>
+    <a href="#why-us">Why FreshMeat</a>
+    <a href="#footer">Contact</a>
+  </nav>
+
+  <div class="header-actions">
+    <button class="icon-btn" id="searchToggle">⌕</button>
+    <div class="profile-wrap">
+      <button class="icon-btn" id="profileBtn">♙</button>
+      <div class="profile-dropdown" id="profileDropdown">
+        <div class="dropdown-user" id="dropdownUser">Welcome, Guest</div>
+        <div id="guestLinks">
+          <button onclick="openAuth('login')">Login</button>
+          <button onclick="openAuth('register')">Create Account</button>
+        </div>
+        <div id="userLinks" hidden>
+          <button onclick="openPage('accountPage')">My Account</button>
+          <button onclick="openPage('addressPage')">Saved Addresses</button>
+          <button onclick="openPage('ordersPage')">My Orders</button>
+          <button onclick="openPage('wishlistPage')">My Wishlist</button>
+          <button onclick="openPage('notificationsPage')">Notifications</button>
+          <button onclick="openPage('supportPage')">Help & Support</button>
+          <button class="logout-link" onclick="logout()">Logout ↗</button>
+        </div>
+      </div>
+    </div>
+    <button class="cart-button" id="cartOpen">Bag <span id="cartCount">0</span></button>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+</header>
+
+<main id="homeContent">
+
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <span class="eyebrow">✳ THE FRESH CUT STANDARD</span>
+    <h1>Good food starts<br>with <em>great meat.</em></h1>
+    <p>Responsibly sourced, expertly cut and delivered fresh. Make every meal worth gathering for.</p>
+    <div class="hero-actions">
+      <a class="primary-btn" href="#shop">Shop fresh cuts ↗</a>
+      <span class="delivery-note">✦ Freshness delivered to your door</span>
+    </div>
+    <div class="hero-proof">
+      <b>✓</b>
+      <span><strong>Freshness you can trust</strong><small>Carefully packed for your kitchen</small></span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img src="https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?w=900" alt="Fresh meat">
+    <div class="floating-card">✳ Fresh, always <small>Quality checked daily</small></div>
+    <div class="hero-stamp">FRESH<br>IS BEST</div>
+  </div>
+</section>
+
+<section class="trust-row" id="why-us">
+  <div>✳ <p><strong>Freshly prepared</strong><small>Prepared close to delivery</small></p></div>
+  <div>♧ <p><strong>Quality you can trust</strong><small>Carefully selected cuts</small></p></div>
+  <div>⌁ <p><strong>Cold-chain delivery</strong><small>Kept chilled on the way</small></p></div>
+  <div>♡ <p><strong>Easy ordering</strong><small>Convenient shopping</small></p></div>
+</section>
+
+<section class="section-wrap" id="shop">
+  <div class="section-heading">
+    <div><span class="eyebrow">FROM OUR COUNTER TO YOUR TABLE</span><h2>Shop by <em>category</em></h2></div>
+  </div>
+  <div class="category-grid" id="categoryGrid">
+    <button class="category-card selected" data-category="All"><span>🥩</span><strong>All cuts</strong><small>Everything fresh</small></button>
+    <button class="category-card" data-category="Chicken"><span>🍗</span><strong>Chicken</strong><small>Everyday favourites</small></button>
+    <button class="category-card" data-category="Mutton"><span>🥩</span><strong>Mutton</strong><small>Rich & delicious</small></button>
+    <button class="category-card" data-category="Fish"><span>🐟</span><strong>Fish</strong><small>Fresh from the sea</small></button>
+    <button class="category-card" data-category="Seafood"><span>🦐</span><strong>Seafood</strong><small>A little indulgence</small></button>
+  </div>
+</section>
+
+<section class="section-wrap products-section" id="products">
+  <div class="section-heading">
+    <div><span class="eyebrow">HANDPICKED FOR YOU</span><h2>Customer <em>favourites</em></h2></div>
+    <div class="product-tools">
+      <input id="searchInput" type="search" placeholder="Search fresh cuts...">
+      <select id="sortSelect">
+        <option value="featured">Featured</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
+      </select>
+    </div>
+  </div>
+  <div class="product-grid" id="productGrid"></div>
+  <p class="empty-state" id="emptyState" hidden>No products found.</p>
+</section>
+
+<section class="promo-banner section-wrap">
+  <div>
+    <span class="eyebrow">A BETTER WAY TO SHOP</span>
+    <h2>Make room for<br><em>something delicious.</em></h2>
+    <p>Thoughtful cuts, easy ordering and freshness at your doorstep.</p>
+    <a class="light-btn" href="#shop">Explore the range ↗</a>
+  </div>
+  <div class="promo-art">GOOD<br>FOOD.<br><i>GOOD</i><br>MOOD.</div>
+</section>
+
+<section class="newsletter section-wrap">
+  <div><span class="eyebrow">THE MEATMATE LETTER</span><h2>Fresh news, straight<br>to your <em>inbox.</em></h2></div>
+  <form id="newsletterForm">
+    <input type="email" id="newsletterEmail" placeholder="Your email address" required>
+    <button class="primary-btn">Subscribe ↗</button>
+  </form>
+</section>
+</main>
+
+<!-- CUSTOMER ACCOUNT PAGES -->
+<main id="customerPages" hidden>
+  <div class="account-layout">
+    <aside class="account-sidebar">
+      <h3>My Account</h3>
+      <div class="sidebar-user" id="sidebarUser">Customer</div>
+      <button onclick="openPage('accountPage')">♙ My Account</button>
+      <button onclick="openPage('addressPage')">⌖ Saved Addresses</button>
+      <button onclick="openPage('ordersPage')">▤ My Orders</button>
+      <button onclick="openPage('wishlistPage')">♡ Wishlist</button>
+      <button onclick="openPage('notificationsPage')">♧ Notifications</button>
+      <button onclick="openPage('supportPage')">☏ Help & Support</button>
+      <button class="logout-link" onclick="logout()">↗ Logout</button>
+    </aside>
+
+    <div class="account-content">
+
+      <section class="account-page" id="accountPage">
+        <span class="eyebrow">PERSONAL INFORMATION</span>
+        <h2>My <em>Account</em></h2>
+        <form id="accountForm" class="form-card">
+          <label>Full name<input id="accountName" required></label>
+          <label>Email address<input id="accountEmail" type="email" required></label>
+          <label>Mobile number<input id="accountPhone" maxlength="10" required></label>
+          <button class="primary-btn">Save Changes</button>
+        </form>
+      </section>
+
+      <section class="account-page" id="addressPage" hidden>
+        <span class="eyebrow">DELIVERY INFORMATION</span>
+        <h2>Saved <em>Addresses</em></h2>
+        <button class="primary-btn" onclick="showAddressForm()">+ Add New Address</button>
+        <form id="addressForm" class="form-card" hidden>
+          <input id="addressLabel" placeholder="Address name (Home / Work)" required>
+          <input id="addressName" placeholder="Receiver name" required>
+          <input id="addressPhone" placeholder="Mobile number" maxlength="10" required>
+          <textarea id="addressText" placeholder="House number, street, area" required></textarea>
+          <input id="addressCity" placeholder="City" required>
+          <input id="addressPincode" placeholder="Pincode" maxlength="6" required>
+          <label class="inline-label"><input type="checkbox" id="defaultAddress"> Set as default address</label>
+          <button class="primary-btn">Save Address</button>
+          <button type="button" class="secondary-btn" onclick="hideAddressForm()">Cancel</button>
+        </form>
+        <div id="addressList" class="data-list"></div>
+      </section>
+
+      <section class="account-page" id="ordersPage" hidden>
+        <span class="eyebrow">YOUR PURCHASES</span>
+        <h2>My <em>Orders</em></h2>
+        <div id="ordersList" class="data-list"></div>
+      </section>
+
+      <section class="account-page" id="wishlistPage" hidden>
+        <span class="eyebrow">YOUR FAVOURITES</span>
+        <h2>My <em>Wishlist</em></h2>
+        <div id="wishlistList" class="product-grid"></div>
+      </section>
+
+      <section class="account-page" id="notificationsPage" hidden>
+        <span class="eyebrow">LATEST UPDATES</span>
+        <h2>My <em>Notifications</em></h2>
+        <button class="secondary-btn" onclick="markNotificationsRead()">Mark all as read</button>
+        <div id="notificationList" class="data-list"></div>
+      </section>
+
+      <section class="account-page" id="supportPage" hidden>
+        <span class="eyebrow">WE ARE HERE TO HELP</span>
+        <h2>Help & <em>Support</em></h2>
+        <form id="supportForm" class="form-card">
+          <label>Subject<input id="supportSubject" required placeholder="What do you need help with?"></label>
+          <label>Related Order ID (optional)<input id="supportOrder"></label>
+          <label>Message<textarea id="supportMessage" required placeholder="Describe your issue..."></textarea></label>
+          <button class="primary-btn">Submit Request</button>
+        </form>
+        <div id="supportHistory" class="data-list"></div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer id="footer">
+  <div class="footer-main">
+    <a class="brand" href="#home"><span class="brand-mark">F</span><span>Fresh<span class="brand-accent">Meat</span><small>FRESHNESS, EVERY DAY</small></span></a>
+    <p>Good food starts with great ingredients.<br>We bring carefully selected fresh cuts to your table.</p>
+    <div class="footer-links"><a href="#shop">Shop</a><a href="#why-us">Our promise</a><a href="mailto:hello@meatmate.example">Contact</a></div>
+  </div>
+  <div class="footer-bottom">© 2026 FreshMeat. All rights reserved.</div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal-backdrop" id="authModal">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeAuth()">×</button>
+    <span class="eyebrow">WELCOME TO FRESHMEAT</span>
+    <h2 id="authTitle">Login</h2>
+    <form id="authForm">
+      <div id="registerFields" hidden>
+        <label>Full Name<input id="regName" placeholder="Your name"></label>
+        <label>Mobile Number<input id="regPhone" maxlength="10" placeholder="10-digit mobile"></label>
+      </div>
+      <label>Email Address<input id="authEmail" type="email" required placeholder="Email address"></label>
+      <label>Password<input id="authPassword" type="password" minlength="6" required placeholder="Minimum 6 characters"></label>
+      <button class="primary-btn full-btn" id="authSubmit">Login</button>
+    </form>
+    <p id="authSwitch">Don't have an account? <a href="#" onclick="switchAuth('register');return false;">Register</a></p>
+    <p class="form-message" id="authMessage"></p>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="drawer-head">
+    <h3>Your Bag <span id="drawerCount">(0)</span></h3>
+    <button class="close-btn" id="cartClose">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="subtotal"><span>Subtotal</span><strong id="cartSubtotal">₹0</strong></div>
+    <small>Delivery charges calculated at checkout.</small>
+    <button class="checkout-btn" onclick="checkout()">Continue to Checkout →</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-backdrop" id="checkoutModal">
+  <div class="modal-box checkout-box">
+    <button class="close-btn" onclick="closeCheckout()">×</button>
+    <span class="eyebrow">ALMOST THERE</span>
+    <h2>Checkout</h2>
+    <div id="checkoutSummary"></div>
+    <label>Select delivery address<select id="checkoutAddress"></select></label>
+    <p class="payment-note">Payment method: Cash on Delivery (Demo)</p>
+    <button class="primary-btn full-btn" onclick="placeOrder()">Place Order</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
